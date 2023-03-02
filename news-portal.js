@@ -21,10 +21,15 @@ const showCategoriees = data =>{
     // console.log(category_id);
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     fetch(url).then(res => res.json())
-    .then(data =>showAllNews(data,category_name))
+    .then(data =>showAllNews(data.data,category_name))
  }
 
  const showAllNews = (data,category_name) => {
     console.log(data,category_name);
-    document.getElementById('news-count').innerText = data.data.length
+    document.getElementById('news-count').innerText = data.length
+    document.getElementById('category_name').innerText = category_name;
+
+    data.forEach(singleNews =>{
+        console.log(singleNews);
+    })
  }
