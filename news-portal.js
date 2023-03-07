@@ -29,8 +29,10 @@ const showCategoriees = data =>{
     document.getElementById('news-count').innerText = data.length
     document.getElementById('category_name').innerText = category_name;
 
-        const newsContainer = document.getElementById('all-news')
+        const newsContainer = document.getElementById('all-news');
+        newsContainer.innerHTML = ""
     data.forEach(singleNews =>{
+        console.log(singleNews)
         // console.log(singleNews);
         // newsContainer.innerHTML += ``
         const card = document.createElement('div');
@@ -38,7 +40,7 @@ const showCategoriees = data =>{
         card.innerHTML = `
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
+            <img src="${singleNews.image_url}" class="img-fluid rounded-start" alt="...">
           </div>
           <div class="col-md-8">
             <div class="card-body">
