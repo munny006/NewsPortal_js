@@ -21,7 +21,12 @@ const showCategoriees = data =>{
     // console.log(category_id);
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     fetch(url).then(res => res.json())
-    .then(data =>showAllNews(data.data,category_name))
+    .then((data) =>
+      {
+
+        fetchData = data.data
+      showAllNews(data.data,category_name)
+ })
  }
 
  const showAllNews = (data,category_name) => {
@@ -69,7 +74,7 @@ const showCategoriees = data =>{
             </div>
             <div> 
             <i class="fa fa-arrow-circle-o-right" aria-hidden="true" style="font-size: 22px;margin-top: 11px;
-            color: blue;" onclick="fetchNewsDetails('${singleNews.news_id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+            color: blue;" onclick="fetchNewsDetails('${singleNews._id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
             </div>
             </div>
           </div>
@@ -77,14 +82,66 @@ const showCategoriees = data =>{
       </div>`;
       newsContainer.appendChild(card)
 
-    })
- }
- const fetchNewsDetails = news_id=>{
+    });
+ };
+ let fetchData
+ const fetchNewsDetails = (news_id)=>{
   let url = `https://openapi.programming-hero.com/api/news/${news_id}`
- fetch(url).then(res=>res.json())
- .then(data=>showNewsDetail(data.data[0]))
+ fetch(url)
+ .then(res=>res.json())
+ .then(data=>showNewDetail(data.data[0]))
 
  }
- const showNewsDetail = newsDetail =>{
+const showNewDetail = NewDetail =>{
+  console.log(NewDetail)
+  // console.log(singleNews);
+  // newsContainer.innerHTML += ``
+  // const card = document.createElement('div');
+  // card.classList.add('card','mb-3');
+  document.getElementById('modal-body').innerHTML = `
+<div class ="card mb-3">
+<div class="row g-0">
+<div class="col-md-12">
+  <img src="${NewDetail.image_url}" class="img-fluid rounded-start" alt="...">
+</div>
+<div class="col-md-8 d-flex flex-column">
+  <div class="card-body">
+    <h5 class="card-title"style="margin-left: -4px;
+    margin-right: -183px;">${NewDetail.title}</h5>
+    <p class="card-text"style="margin-left: -3px;
+    margin-right: -167px;
+    font-size: 16px;
+    margin-top: 26px;">${NewDetail.details.slice(0,230)}...</p>
+   
+  </div>
+  <div class="card-footer border-0 bg-body d-flex justify-content-between">
+  <div class="d-flex gap-2">
+  <img src="${NewDetail.author.img}" class="img-fluid  rounded-circle" alt="..." height="40" width="40">
+  <div>
+  <p class="m-0 p-0">${NewDetail.author.name}</p>
+  <p class="m-0 p-0">${NewDetail.author.published_date}</p>
+  </div>
+  </div>
+  <div class = "d-flex align-items-center">
+  <i class="fa fa-eye" aria-hidden="true"></i>
+  <p class=""style="margin-top: 17px;margin-right: -51px;">${NewDetail.total_view}</p>
+  
+  </div>
+ 
+  
+  </div>
+</div>
 
- }
+</div>
+</div>`;
+
+}
+const showPending = ()=>{
+
+
+  showAllNews(fetchData,"Random")
+}
+
+
+
+ 
