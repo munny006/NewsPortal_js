@@ -49,7 +49,16 @@ const showCategoriees = data =>{
              
             </div>
             <div class="card-footer border-0 bg-body">
-            <p class="card-text">${singleNews.details.slice(0,230)}...</p>
+            <div class="d-flex gap-2">
+            <img src="${singleNews.author.img}" class="img-fluid  rounded-circle" alt="..." height="40" width="40">
+            <div>
+            <p class="m-0 p-0">${singleNews.author.name}</p>
+            <p class="m-0 p-0">${singleNews.author.published_date}</p>
+            </div>
+            </div>
+            <div> </div>
+            <div> </div>
+            <div> </div>
             </div>
           </div>
         
